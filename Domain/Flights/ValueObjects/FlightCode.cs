@@ -9,8 +9,9 @@ namespace Domain.Flights.ValueObjects;
 /// </summary>
 public sealed record FlightCode
 {
-    public string? Value { get; init; }
     private readonly IRegularExpressionsService? _regularExpressionsService;
+    public string? Value { get; init; }
+    
 
     public FlightCode(string code, IRegularExpressionsService regularExpressionsService)
     {
