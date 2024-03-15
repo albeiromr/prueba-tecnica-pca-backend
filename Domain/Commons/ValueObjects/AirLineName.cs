@@ -1,8 +1,8 @@
-﻿using Domain.AirLines.Constants;
+﻿using Domain.Commons.Constants;
 using Domain.Commons.Interfaces;
 using System;
 
-namespace Domain.AirLines.ValueObjects;
+namespace Domain.Commons.ValueObjects;
 
 /// <summary>
 /// Represents the complete airline name

@@ -1,6 +1,7 @@
 ﻿using System;
 using Domain.AirLines.ValueObjects;
 using Domain.Commons.Abstractions;
+using Domain.Commons.ValueObjects;
 
 namespace Domain.AirLines;
 

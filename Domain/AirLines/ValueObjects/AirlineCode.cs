@@ -1,4 +1,4 @@
-﻿using Domain.AirLines.Constants;
+﻿using Domain.Commons.Constants;
 using Domain.Commons.Interfaces;
 using System;
 
