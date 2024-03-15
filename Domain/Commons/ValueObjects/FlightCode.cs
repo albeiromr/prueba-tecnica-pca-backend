@@ -2,7 +2,7 @@
 using Domain.Commons.Interfaces;
 using System;
 
-namespace Domain.Flights.ValueObjects;
+namespace Domain.Commons.ValueObjects;
 
 /// <summary>
 /// Represents the individual an unique flight code
@@ -11,7 +11,7 @@ public sealed record FlightCode
 {
     private readonly IRegularExpressionsService? _regularExpressionsService;
     public string? Value { get; init; }
-    
+
 
     public FlightCode(string code, IRegularExpressionsService regularExpressionsService)
     {
