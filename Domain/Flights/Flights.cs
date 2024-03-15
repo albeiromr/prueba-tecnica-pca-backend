@@ -1,6 +1,7 @@
 ﻿using Domain.AirLines;
 using Domain.Cities;
 using Domain.Commons.Abstractions;
+using Domain.Commons.Interfaces;
 using Domain.Commons.ValueObjects;
 using Domain.Flights.ValueObjects;
 using System;
@@ -49,13 +50,14 @@ public sealed class Flight : Entity
         City? origin,
         City? destination,
         FlightDuration? flightDuration, 
-        FlightPrice? flightPrice
+        FlightPrice? flightPrice,
+        IRegularExpressionsService regularExpressionsService
     )
     {
         // calculating the airline flight count
         int count = airline!.FlightsCount!.Value > 0 ? airline.FlightsCount!.Value : 1;
         // generating the flight code
-        FlightCode code = new FlightCode($"{airline.Code}{count}");
+        FlightCode code = new FlightCode($"{airline.Code}{count}", regularExpressionsService);
 
         return new Flight(
             Guid.NewGuid(),
