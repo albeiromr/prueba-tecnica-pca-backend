@@ -10,11 +10,11 @@ using Application.Commons.Constants;
 
 namespace Application.Cities.GetCities;
 
-internal sealed class GetCitiesQueryHandler : IQueryHandler<GetCitiesQuery, List<CityResponse>>
+internal sealed class GetAirlinesQueryHandler : IQueryHandler<GetCitiesQuery, List<CityResponse>>
 {
     private readonly ICityRepository? _cityRepository;
 
-    public GetCitiesQueryHandler(ICityRepository? cityRepository)
+    public GetAirlinesQueryHandler(ICityRepository? cityRepository)
     {
         _cityRepository = cityRepository;
     }
@@ -30,7 +30,7 @@ internal sealed class GetCitiesQueryHandler : IQueryHandler<GetCitiesQuery, List
         catch (Exception ex)
         {
             return new Result<List<CityResponse>>(default!, false, new Error(
-                CitiesConstants.CitiesQueryError!,
+                Constants.CitiesQueryError!,
                 ex.Message
             ));
         }

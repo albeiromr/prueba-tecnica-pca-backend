@@ -1,4 +1,5 @@
-﻿using Application.Cities.Interfaces;
+﻿using Application.Airlines.Interfaces;
+using Application.Cities.Interfaces;
 using Domain.Commons.Interfaces;
 using Domain.Commons.Services;
 using Domain.Reservations.Interfaces;
@@ -34,6 +35,7 @@ public static class DependencyInjection
 
         // injecting Repositories
         services.AddScoped<ICityRepository, CityRepository>();
+        services.AddScoped<IAirlineRepository, AirlineRepository>();
 
 
         return services;
