@@ -1,4 +1,7 @@
-﻿using Infrastructure.Database;
+﻿using Domain.Commons.Interfaces;
+using Domain.Commons.Services;
+using Domain.Reservations.Interfaces;
+using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,8 +26,9 @@ public static class DependencyInjection
             options.UseNpgsql(connectionString).UseCamelCaseNamingConvention();
         });
 
-        // injecting repositories
-        //services.AddScoped<IUserRepository, UserRepository>();
+        // injecting services
+        services.AddScoped<IPlaneSeatService, PlaneSeatService>();
+        services.AddScoped<IRegularExpressionsService, RegularExpressionsService>();
 
         return services;
     }
