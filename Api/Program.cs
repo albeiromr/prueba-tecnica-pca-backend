@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Application;
+using Infrastructure;
 
 namespace Api
 {
@@ -21,6 +22,7 @@ namespace Api
 
             // adding Application and infrastructure layers
             builder.Services.AddApplication();
+            builder.Services.AddInfrastructure(builder.Configuration);
 
             var app = builder.Build();
 
