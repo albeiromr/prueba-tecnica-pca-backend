@@ -1,6 +1,8 @@
-﻿using Domain.Commons.Interfaces;
+﻿using Application.Cities.Interfaces;
+using Domain.Commons.Interfaces;
 using Domain.Commons.Services;
 using Domain.Reservations.Interfaces;
+using Infraestructure.Repositories;
 using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +31,10 @@ public static class DependencyInjection
         // injecting services
         services.AddScoped<IPlaneSeatService, PlaneSeatService>();
         services.AddScoped<IRegularExpressionsService, RegularExpressionsService>();
+
+        // injecting Repositories
+        services.AddScoped<ICityRepository, CityRepository>();
+
 
         return services;
     }
