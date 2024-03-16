@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 using System;
-using Application.Users.GetUsers;
 using Application.Cities.Responses;
 using Application.Cities.Interfaces;
 using Application.Commons.Constants;
+
+namespace Application.Cities.GetCities;
 
 internal sealed class GetCitiesQueryHandler : IQueryHandler<GetCitiesQuery, List<CityResponse>>
 {
