@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Threading;
 using Application.Airlines.Responses;
+using Domain.AirLines;
 
 namespace Application.Airlines.Interfaces;
 
@@ -11,4 +12,9 @@ namespace Application.Airlines.Interfaces;
 public interface IAirlineRepository
 {
     Task<List<AirlineResponse>> GetAirlinesAsync(CancellationToken cancellationToken = default);
+
+    Task<Airline> GetAirlineByNameAsync(
+        string? airlineName,
+        CancellationToken cancellationToken = default
+    );
 }

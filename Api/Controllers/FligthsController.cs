@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Threading;
 using Application.Flights.GetFlights;
+using Application.Flights.Dtos;
+using Application.Flights.CreateFlight;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Web_Api.Controllers;
 
@@ -25,6 +28,17 @@ public class FlightsController : ControllerBase
     {
         var query = new GetFlightsQuery();
         var actionResult = await _sender!.Send(query, cancellationToken);
+        return actionResult.Success ? Ok(actionResult) : NotFound();
+    }
+
+    [HttpPost("create")]
+    public async Task<IActionResult> CreateFlight(
+        [FromBody] CreateFlightDto body, 
+        CancellationToken cancellationToken
+    )
+    {
+        var command = new CreateFlightCommand(body);
+        var actionResult = await _sender!.Send(command, cancellationToken);
         return actionResult.Success ? Ok(actionResult) : NotFound();
     }
 }

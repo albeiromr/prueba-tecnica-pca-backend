@@ -32,4 +32,15 @@ public sealed class AirlineRepository : IAirlineRepository
 
         return airlines;
     }
+
+    public async Task<Airline> GetAirlineByNameAsync(
+        string? airlineName,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var dbSet = _appDbContext!.Set<Airline>();
+        var dbAirline = await dbSet.FirstOrDefaultAsync<Airline>(a => a.Name == airlineName);
+
+        return dbAirline!;
+    }
 }
