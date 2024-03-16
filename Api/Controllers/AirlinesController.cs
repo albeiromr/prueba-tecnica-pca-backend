@@ -8,12 +8,12 @@ namespace Web_Api.Controllers;
 
 [ApiController]
 [Route("api/airlines")]
-public class AirlineController : ControllerBase
+public class AirlinesController : ControllerBase
 {
     //Sender de mediatr
     private readonly ISender? _sender;
 
-    public AirlineController(ISender? sender)
+    public AirlinesController(ISender? sender)
     {
         _sender = sender;
     }

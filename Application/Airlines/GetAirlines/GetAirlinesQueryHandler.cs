@@ -10,11 +10,11 @@ using Application.Airlines.Interfaces;
 
 namespace Application.Airlines.GetAirlines;
 
-internal sealed class GetAirlinesQueryHandler : IQueryHandler<GetAirlinesQuery, List<AirlineResponse>>
+internal sealed class GetFlightsQueryHandler : IQueryHandler<GetAirlinesQuery, List<AirlineResponse>>
 {
     private readonly IAirlineRepository? _airlineRepository;
 
-    public GetAirlinesQueryHandler(IAirlineRepository? airlineRepository)
+    public GetFlightsQueryHandler(IAirlineRepository? airlineRepository)
     {
         _airlineRepository = airlineRepository;
     }
