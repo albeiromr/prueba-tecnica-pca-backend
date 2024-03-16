@@ -1,9 +1,6 @@
 ﻿using Domain.AirLines;
-using Domain.Cities;
 using Domain.Commons.Abstractions;
 using Domain.Commons.Interfaces;
-using Domain.Commons.ValueObjects;
-using Domain.Flights.ValueObjects;
 using System;
 
 namespace Domain.Flights;
@@ -13,12 +10,13 @@ namespace Domain.Flights;
 /// </summary>
 public sealed class Flight : Entity
 {
-    public AirLineName? AirLineName { get; private set; }
-    public FlightCode? FlightCode { get; private set; }
-    public City? Origin { get; private set; }
-    public City? Destination { get; private set; }
-    public FlightDuration? FlightDuration { get; private set; }
-    public FlightPrice? FlightPrice { get; private set; }
+    public string? AirLineName { get; private set; }
+    public string? FlightCode { get; private set; }
+    public string? Origin { get; private set; }
+    public string? Destination { get; private set; }
+    public DateTime DepartureDate { get; private set; }
+    public DateTime ArrivalDate { get; private set; }
+    public decimal FlightPrice { get; private set; }
 
     // this constructor is required for executing migrations with 
     // entity framework under the domain driven design architecture
@@ -26,19 +24,21 @@ public sealed class Flight : Entity
 
     private Flight(
         Guid id, 
-        AirLineName? airLineName, 
-        FlightCode? flightCode, 
-        City? origin, 
-        City? destination, 
-        FlightDuration? flightDuration, 
-        FlightPrice? flightPrice
+        string? airLineName, 
+        string? flightCode, 
+        string? origin, 
+        string? destination, 
+        DateTime departureDate,
+        DateTime arrivalDate,
+        decimal flightPrice
     ): base(id)
     {
         AirLineName = airLineName;
         FlightCode = flightCode;
         Origin = origin;
         Destination = destination;
-        FlightDuration = flightDuration;
+        DepartureDate = departureDate;
+        ArrivalDate = arrivalDate;
         FlightPrice = flightPrice;
     }
 
@@ -47,17 +47,17 @@ public sealed class Flight : Entity
     /// </summary>
     public static Flight Create(
         Airline? airline,
-        City? origin,
-        City? destination,
-        FlightDuration? flightDuration, 
-        FlightPrice? flightPrice,
-        IRegularExpressionsService regularExpressionsService
+        string? origin,
+        string? destination,
+        DateTime departureDate,
+        DateTime arrivalDate,
+        decimal flightPrice
     )
     {
         // calculating the airline flight count
-        int count = airline!.FlightsCount!.Value > 0 ? airline.FlightsCount!.Value : 1;
+        int count = airline!.FlightsCount > 0 ? airline.FlightsCount : 1;
         // generating the flight code
-        FlightCode code = new FlightCode($"{airline.Code}{count}", regularExpressionsService);
+        string code = $"{airline.Code}{count}";
 
         return new Flight(
             Guid.NewGuid(),
@@ -65,7 +65,8 @@ public sealed class Flight : Entity
             code,
             origin,
             destination,
-            flightDuration,
+            departureDate,
+            arrivalDate,
             flightPrice
         );
     }

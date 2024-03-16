@@ -1,9 +1,6 @@
-﻿using Domain.Cities;
-using Domain.Commons.Abstractions;
-using Domain.Commons.ValueObjects;
+﻿using Domain.Commons.Abstractions;
 using Domain.Flights;
 using Domain.Reservations.Interfaces;
-using Domain.Reservations.ValueObjects;
 using System;
 
 namespace Domain.Reservations;
@@ -13,19 +10,19 @@ namespace Domain.Reservations;
 /// </summary>
 public sealed class Reservation : Entity
 {
-    public FirstName? ClientName { get; private set; }
-    public FirstLastName? ClientLastName { get; private set; }
-    public Email? ClientEmail { get; private set; }
-    public FlightCode? FlightCode { get; private set;}
-    public AirLineName? AirLineName { get; private set; }
-    public City? Origin { get; private set; }
-    public City? Destination { get; private set; }
+    public string? ClientName { get; private set; }
+    public string? ClientLastName { get; private set; }
+    public string? ClientEmail { get; private set; }
+    public string? FlightCode { get; private set;}
+    public string? AirLineName { get; private set; }
+    public string? Origin { get; private set; }
+    public string? Destination { get; private set; }
     public DateTime DepartureDate { get; private set; }
 
     /// <summary>
     /// Represents the seat where the client is gonig to be sat within the plane
     /// </summary>
-    public PlaneSeat? PlaneSeat { get; private set; }
+    public string? PlaneSeat { get; private set; }
 
     // this constructor is required for executing migrations with 
     // entity framework under the domain driven design architecture
@@ -33,15 +30,15 @@ public sealed class Reservation : Entity
 
     public Reservation(
         Guid id,
-        FirstName? clientName,
-        FirstLastName? clientLastName,
-        Email? clientEmail,
-        FlightCode? flightCode,
-        AirLineName? airlineName,
-        City? origin,
-        City? destination,
+        string? clientName,
+        string? clientLastName,
+        string? clientEmail,
+        string? flightCode,
+        string? airlineName,
+        string? origin,
+        string? destination,
         DateTime departureDate,
-        PlaneSeat? planeSeat
+        string? planeSeat
     ): base(id)
     {
         ClientName = clientName;
@@ -59,15 +56,14 @@ public sealed class Reservation : Entity
     /// Returns a new Reservation instance
     /// </summary>
     public static Reservation Create(
-        FirstName? clientName,
-        FirstLastName? clientLastName,
-        Email? clientEmail,
+        string? clientName,
+        string? clientLastName,
+        string? clientEmail,
         Flight flight,
         IPlaneSeatService planeSeatService
     )
     {
         string? seatCode = planeSeatService!.GetSeatCode();
-        PlaneSeat seat = new PlaneSeat(seatCode);
         
         return new Reservation(
             Guid.NewGuid(),
@@ -78,8 +74,8 @@ public sealed class Reservation : Entity
             flight.AirLineName,
             flight.Origin,
             flight.Destination,
-            flight.FlightDuration!.DepartureDate,
-            seat
+            flight.DepartureDate,
+            seatCode
         );
     }
 }

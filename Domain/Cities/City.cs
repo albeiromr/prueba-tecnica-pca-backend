@@ -1,5 +1,4 @@
-﻿using Domain.Cities.ValueObjects;
-using Domain.Commons.Abstractions;
+﻿using Domain.Commons.Abstractions;
 using System;
 
 namespace Domain.Cities;
@@ -9,10 +8,10 @@ namespace Domain.Cities;
 /// </summary>
 public sealed class City : Entity
 {
-    public CityName? CityName { get; private set; }
+    public string? CityName { get; private set; }
 
     // this constructor is private to protect the City entity from external access
-    private City(Guid id, CityName? cityName) : base(id)
+    private City(Guid id, string? cityName) : base(id)
     {
         CityName = cityName;
     }
@@ -25,7 +24,7 @@ public sealed class City : Entity
     /// <summary>
     /// Returns qa new instance of the City entity
     /// </summary>
-    public static City Create(CityName cityName, AirportName airportName)
+    public static City Create(string? cityName)
     {
         return new City(Guid.NewGuid(), cityName);
     }

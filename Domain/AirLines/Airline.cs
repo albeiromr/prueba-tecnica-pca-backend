@@ -1,7 +1,5 @@
 ﻿using System;
-using Domain.AirLines.ValueObjects;
 using Domain.Commons.Abstractions;
-using Domain.Commons.ValueObjects;
 
 namespace Domain.AirLines;
 
@@ -10,16 +8,16 @@ namespace Domain.AirLines;
 /// </summary>
 public sealed class Airline : Entity
 {
-    public AirLineName? Name { get; private set; }
-    public AirlineCode? Code { get; private set; }
+    public string? Name { get; private set; }
+    public string? Code { get; private set; }
 
     /// <summary>
     /// Represents the amount of flights that an airline has created for selling seats
     /// </summary>
-    public AirlineFlightCount? FlightsCount { get; private set; }
+    public int FlightsCount { get; private set; }
 
     // this constructor is private to protect the Airline entity from external access
-    private Airline(Guid id, AirLineName? name, AirlineCode? code, AirlineFlightCount flightsCount) : base(id)
+    private Airline(Guid id, string? name, string? code, int flightsCount) : base(id)
     {
         Name = name;
         Code = code;
@@ -33,7 +31,7 @@ public sealed class Airline : Entity
     /// <summary>
     /// return a new Airline instance
     /// </summary>
-    public static Airline Create(AirLineName? name, AirlineCode? code, AirlineFlightCount flightsCount)
+    public static Airline Create(string? name, string? code, int flightsCount)
     {
         return new Airline(Guid.NewGuid(), name, code, flightsCount);
     }
@@ -43,10 +41,9 @@ public sealed class Airline : Entity
     /// </summary>
     public void IncrementsFlightsCount()
     {
-        int count = FlightsCount!.Value;
+        int count = FlightsCount;
         count += 1;
-        AirlineFlightCount newFlightsCount = new AirlineFlightCount(count);
-        FlightsCount = newFlightsCount;
+        FlightsCount = count;
     }
 
 }
