@@ -10,11 +10,11 @@ using Application.Flights.Interfaces;
 
 namespace Application.Flights.GetFlights;
 
-internal sealed class GetFlightsQueryHandler : IQueryHandler<GetFlightsQuery, List<FlightResponse>>
+internal sealed class GetReservationsQueryHandler : IQueryHandler<GetFlightsQuery, List<FlightResponse>>
 {
     private readonly IFlightRepository? _flightRepository;
 
-    public GetFlightsQueryHandler(IFlightRepository? flightRepository)
+    public GetReservationsQueryHandler(IFlightRepository? flightRepository)
     {
         _flightRepository = flightRepository;
     }

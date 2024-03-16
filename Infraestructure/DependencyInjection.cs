@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Application.Reservations.Interfaces;
 
 namespace Infrastructure;
 
@@ -38,6 +39,7 @@ public static class DependencyInjection
         services.AddScoped<ICityRepository, CityRepository>();
         services.AddScoped<IAirlineRepository, AirlineRepository>();
         services.AddScoped<IFlightRepository, FlightRepository>();
+        services.AddScoped<IReservationRepository, ReservationRepository>();
 
 
         return services;
