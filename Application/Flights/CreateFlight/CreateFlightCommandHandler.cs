@@ -43,6 +43,7 @@ internal sealed class CreateFlightCommandHandler : ICommandHandler<CreateFlightC
             );
 
             _flightRepository!.Add(flight);
+            airline.IncrementsFlightsCount();
 
             await _flightRepository!.SaveChangesAsync(cancellationToken);
 
