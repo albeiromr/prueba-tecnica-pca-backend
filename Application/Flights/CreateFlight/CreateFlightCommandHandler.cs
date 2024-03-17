@@ -1,4 +1,5 @@
 ﻿using Application.Airlines.Interfaces;
+using Application.Commons.Constants;
 using Application.Commons.Interfaces;
 using Application.Flights.Interfaces;
 using Domain.Commons.Abstractions;
@@ -41,21 +42,18 @@ internal sealed class CreateFlightCommandHandler : ICommandHandler<CreateFlightC
                 request.createflightDto.FlightPrice
             );
 
-            _rentalRepository.Add(rental);
+            _flightRepository!.Add(flight);
 
-            await _unitOfWork!.SaveChangesAsync(cancellationToken);
+            await _flightRepository!.SaveChangesAsync(cancellationToken);
 
-            return rental.Id;
+            return new Result<Guid>(flight.Id, true, null!);
         }
-        catch (ConcurrencyException)
+        catch (Exception ex)
         {
-            //Ojo!!! ConcurrencyException es una excepción personalizada que es explicada en
-            // el video 47 del curso udemy concurrencia optimista
-            return Result.CreateWithFailureStatus<Guid>(RentalErrors.Overlap);
+            return new Result<Guid>(default, false, new Error(
+                Constants.FlightCreationError!,
+                ex.Message
+            ));
         }
-
-        //return new Result<Guid>(Guid.NewGuid(), false, null!);
-        
-
     }
 }

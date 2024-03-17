@@ -1,5 +1,6 @@
 ﻿using Application.Flights.Interfaces;
 using Application.Flights.Responses;
+using Domain.Commons.Abstractions;
 using Domain.Flights;
 using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
@@ -39,5 +40,16 @@ public sealed class FlightRepository : IFlightRepository
         }
 
         return flights;
+    }
+
+    public void Add(Flight flight)
+    {
+        _appDbContext!.Add(flight);
+    }
+
+    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        var result = await _appDbContext!.SaveChangesAsync(cancellationToken);
+        return result;
     }
 }

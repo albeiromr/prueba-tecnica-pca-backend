@@ -5,7 +5,6 @@ using System.Threading;
 using Application.Flights.GetFlights;
 using Application.Flights.Dtos;
 using Application.Flights.CreateFlight;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Web_Api.Controllers;
 

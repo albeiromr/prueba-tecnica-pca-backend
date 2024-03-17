@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Threading;
 using Application.Flights.Responses;
+using Domain.Flights;
 
 namespace Application.Flights.Interfaces;
 
@@ -11,4 +12,8 @@ namespace Application.Flights.Interfaces;
 public interface IFlightRepository
 {
     Task<List<FlightResponse>> GetFlightsAsync(CancellationToken cancellationToken = default);
+
+    void Add(Flight flight);
+
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
