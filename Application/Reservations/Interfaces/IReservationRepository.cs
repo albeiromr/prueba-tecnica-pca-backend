@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using System.Threading;
 using Application.Reservations.Responses;
+using Domain.Flights;
+using Domain.Reservations;
 
 namespace Application.Reservations.Interfaces;
 
@@ -11,4 +13,8 @@ namespace Application.Reservations.Interfaces;
 public interface IReservationRepository
 {
     Task<List<ReservationResponse>> GetReservationsAsync(CancellationToken cancellationToken = default);
+
+    void Add(Reservation reservation);
+
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

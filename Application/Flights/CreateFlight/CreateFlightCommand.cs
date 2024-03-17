@@ -1,6 +1,5 @@
 ﻿using Application.Commons.Interfaces;
 using Application.Flights.Dtos;
-using Domain.Commons.Abstractions;
 using System;
 
 namespace Application.Flights.CreateFlight;

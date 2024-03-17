@@ -1,7 +1,9 @@
 ﻿using Application.Flights.Interfaces;
 using Application.Flights.Responses;
+using Domain.AirLines;
 using Domain.Commons.Abstractions;
 using Domain.Flights;
+using Domain.Reservations;
 using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -40,6 +42,17 @@ public sealed class FlightRepository : IFlightRepository
         }
 
         return flights;
+    }
+
+    public async Task<Flight> GetFlightByCodeAsync(
+        string? flightCode,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var dbSet = _appDbContext!.Set<Flight>();
+        var dbFlight = await dbSet.FirstOrDefaultAsync<Flight>(f => f.FlightCode == flightCode);
+
+        return dbFlight!;
     }
 
     public void Add(Flight flight)

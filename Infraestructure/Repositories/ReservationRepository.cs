@@ -1,5 +1,7 @@
 ﻿using Application.Reservations.Interfaces;
 using Application.Reservations.Responses;
+using Domain.AirLines;
+using Domain.Flights;
 using Domain.Reservations;
 using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
@@ -41,5 +43,16 @@ public sealed class ReservationRepository : IReservationRepository
         }
 
         return reservations;
+    }
+
+    public void Add(Reservation reservation)
+    {
+        _appDbContext!.Add(reservation);
+    }
+
+    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        var result = await _appDbContext!.SaveChangesAsync(cancellationToken);
+        return result;
     }
 }
