@@ -38,6 +38,6 @@ public class ReservationsController : ControllerBase
     {
         var command = new CreateReservationCommand(body);
         var actionResult = await _sender!.Send(command, cancellationToken);
-        return actionResult.Success ? Ok(actionResult) : NotFound();
+        return actionResult.Success ? StatusCode(201, actionResult) : NotFound();
     }
 }

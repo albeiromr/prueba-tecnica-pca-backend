@@ -38,6 +38,6 @@ public class FlightsController : ControllerBase
     {
         var command = new CreateFlightCommand(body);
         var actionResult = await _sender!.Send(command, cancellationToken);
-        return actionResult.Success ? Ok(actionResult) : NotFound();
+        return actionResult.Success ? StatusCode(201, actionResult) : NotFound();
     }
 }
