@@ -26,7 +26,7 @@ public sealed class AirlineRepository : IAirlineRepository
         List<AirlineResponse> airlines = new List<AirlineResponse>();
         foreach (var airline in dbAirlines)
         {
-            var response = new AirlineResponse(airline.Name, airline.Code);
+            var response = new AirlineResponse(airline.Name, airline.Code, airline.FlightsCount);
             airlines.Add(response);
         }
 
