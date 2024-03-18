@@ -24,6 +24,7 @@ internal sealed class GetReservationsQueryHandler : IQueryHandler<GetReservation
         try
         {
             var reservations = await _reservationRepository!.GetReservationsAsync(cancellationToken);
+            reservations.Reverse();
             return new Result<List<ReservationResponse>>(reservations, true, null!);
 
         }

@@ -24,6 +24,7 @@ internal sealed class GetReservationsQueryHandler : IQueryHandler<GetFlightsQuer
         try
         {
             var flights = await _flightRepository!.GetFlightsAsync(cancellationToken);
+            flights.Reverse();
             return new Result<List<FlightResponse>>(flights, true, null!);
 
         }
